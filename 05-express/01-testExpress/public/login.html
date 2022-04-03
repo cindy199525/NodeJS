@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>登录界面</title>
+    <script src="./js/jquery.js"></script>
+</head>
+
+<body>
+    <h1>用户登录</h1>
+    <input type="text" id="username">
+    <input type="text" id="password">
+    <button id="loginBtn">登录</button>
+
+
+    <script>
+        $('#loginBtn').click(function () {
+            const username = $('#username').val();
+            const password = $('#password').val();
+            $.ajax({
+                // 设置前后端连接的接口
+                url: '/users/login',
+                // 设置前端发送给后端的数据
+                data: {
+                    username,
+                    password,
+                },
+                // 用于请求类型，get,post(put,delete)
+                type: 'post',
+                //get方法是得到后端东西，post是发送给后端东西
+                // 请求成功后触发success方法，msg用于接收后端相应回来的结果
+                success: function (msg) {//简写success(msg)
+                    console.log(msg);
+                    if(msg.status){
+                        alert('登录成功')
+                    }else{
+                        alert('登录失败')
+                    }
+
+                }
+
+            })
+
+        })
+    </script>
+</body>
+
+</html>

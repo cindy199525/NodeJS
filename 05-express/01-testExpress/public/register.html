@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+   
+    <title>注册界面</title>
+    <script src="./js/jquery.js"></script>
+</head>
+
+<body>
+    <h1>用户注册</h1>
+    <input type="text" id="username">
+    <input type="text" id="password">
+    <button id="registerBtn">注册</button>
+
+
+    <script>
+        $('#username').blur(function () {//blur为失焦事件
+            const username = $('#username').val();
+            $.ajax({
+                // 设置前后端连接的接口
+                url: '/users/IsAccess',
+                // 设置前端发送给后端的数据
+                data: {
+                    username,
+                },
+                // 用于请求类型，get,post(put,delete)
+                type: 'post',
+                // 请求成功后触发success方法，msg用于接收后端相应回来的结果
+                success: function (msg) {//简写success(msg)
+                    if(!msg.status){
+                        $('#registerBtn').prop('disabled',true)
+
+                    }
+                    else{
+                        $('#registerBtn').prop('disabled',false)
+                    }
+                    console.log(msg);
+
+                }
+
+            })
+
+        })
+
+
+        $('#registerBtn').click(function () {
+            const username = $('#username').val();
+            const password = $('#password').val();
+            $.ajax({
+                // 设置前后端连接的接口
+                url: '/users/register',
+                // 设置前端发送给后端的数据
+                data: {
+                    username,
+                    password,
+
+                },
+                // 用于请求类型，get,post(put,delete)
+                type: 'post',
+                // 请求成功后触发success方法，msg用于接收后端相应回来的结果
+                success: function (msg) {//简写success(msg)
+                    console.log(msg);
+
+                }
+
+            })
+
+        })
+    </script>
+</body>
+
+</html>

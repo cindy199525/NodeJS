@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生管理系统</title>
+    <script src="./js/jquery.js"></script>
+</head>
+
+<body>
+    <h2>学生列表</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        </tbody>
+    </table>
+
+
+
+    <script>
+        getStudents();
+        function getStudents() {
+            $.ajax({
+                url: '/students/getstudents',
+                type: 'get',
+                success: function ({ message, status, data }) {
+                    if (status) {
+                        // 渲染数据
+
+                        // let str = '';
+                        // data.forEach(item => {
+                        //     str += `
+                        //         <tr>
+                        //             <th>${item.name}</th>
+                        //             <th>${item.age}</th>
+                        //             <th>${item.gender}</th>
+                        //             <th>
+                        //                 <button>修改</button>
+                        //                 <button>删除</button>
+                        //             </th>
+                        //         </tr>
+                        //         `;
+                        // });
+                        // // console.log(str);
+                        // $('tbody').html(str)
+
+                        // map返回的是一个新数组,join是数组的拼接
+                        const str = data.map(function (item, index) {
+                            return `
+                                <tr>
+                                     <th>${item.name}</th>
+                                     <th>${item.age}</th>
+                                     <th>${item.gender}</th>
+                                    <th>
+                                         <button>修改</button>
+                                         <button class='removeBtn' data-id='${item.id}'>删除</button>
+                                     </th>
+                                 </tr>
+                            `;
+                        }).join('');
+                        // console.log(str)
+                        $('tbody').html(str)
+                    }
+                }
+
+            })
+
+        }
+
+
+        // 删除=>事件委托（用on方法），将子元素想要执行的事件，委托给父元素去绑定
+        $("tbody").on('click', '.removeBtn', function () {
+            // 获取当前点击的这个删除按钮所对应的学生id
+            console.log(this);//拿到当前这个按钮
+            const id = $(this).data('id');//利用jquery里的自定义属性拿到id
+            console.log(id);
+            $.ajax({
+                url: '/students/deleteStudents',
+                type: 'post',
+                data:{id},
+                success(msg){
+                    console.log(msg);
+                    if(msg.status){
+                        alert('删除成功');
+                        getStudents();
+                    }
+
+                }
+
+            })
+        })
+
+    </script>
+
+
+
+</body>
+
+</html>

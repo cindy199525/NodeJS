@@ -1,0 +1,65 @@
+.header{width:100%;height: 58px;z-index: 1;position: absolute;}
+.headerImg{position: absolute;margin-top: 50px;margin-left: 40px;width: 30px;}
+.headerName{position: absolute;margin-top: 30px;margin-left: 80px;color: white;font-size: 40px;font-weight: 600;}
+.headerName2{position: absolute;margin-top: 180px;margin-left: 950px;color: black;font-size: 45px;font-weight: 600;}
+.headerName3{position: absolute;margin-top: 180px;margin-left: 950px;color: black;font-size: 45px;font-weight: 600;}
+.headerName4{position: absolute;margin-top: 180px;margin-left: 950px;color: black;font-size: 45px;font-weight: 600;}
+.headerName6{position: absolute;margin-top: 180px;margin-left: 150px;color: black;font-size: 45px;font-weight: 600;}
+.button1{position: absolute;margin-top: 35px;margin-left: 490px;font-size: 35px;color: white;font-weight: 600;}
+.button2{position: absolute;margin-top: 35px;margin-left: 20px;font-size: 35px;color: white;font-weight: 600;}
+.button3{position: absolute;margin-top: 35px;margin-left: 20px;font-size: 35px;color: white;font-weight: 600;}
+.button4{position: absolute;margin-top: 35px;margin-left: 20px;font-size: 35px;color: white;font-weight: 600;}
+.button5{position: absolute;margin-top: 35px;margin-left: 20px;font-size: 35px;color: white;font-weight: 600;}
+a:hover{text-decoration: none;color: #00F5FF;}
+.formSearch{z-index: 1;position: absolute;margin-top:-43px;margin-left: 990px;}
+.home{background: url(../img/image40.jpg);background-size:cover;background-repeat: no-repeat;background-attachment: fixed;}
+.banner{ width:1080px; margin:20px auto 0;background:rgba(255,255,255,0.8); border-radius:10px; border:4px solid black;}
+.nr{ width:1100px;margin-left: 130px; background:rgba(255,255,255,0.3); border-radius:10px; margin:0 auto; border:4px solid #FC0;}
+.nr p{ padding:15px 25px; color: #000;text-indent: 2em;}
+.nr h2{ font-family: "方正细倩简体"; padding-left:24px; padding-top:15px; color:#FF0000}
+.nr2{ width:400px;height: 500px; background:rgba(255,255,255,0.8); border-radius:10px; margin:0 auto; border:4px solid white;margin-left: 90px;margin-right: 20px;margin-bottom: 20px;}
+.nr2{ padding:15px 25px; color: #000;text-indent: 2em;}
+.nr2{ font-family: "方正细倩简体"; padding-left:24px; padding-top:15px; color:#FF0000}
+.member {background: url(../img/background1.jpg);background-size:cover;background-repeat: no-repeat;background-attachment: fixed;}
+.Rotation {position: absolute;margin-left: 550px;margin-top: 270px;}
+.member-h1 {text-align: center;color: black;font-size: 29px;position: absolute;margin-top: 20px;}
+.memberbackground{border-radius:10px;background: rgba(255, 255, 255, 0.6);border: 3px solid #fff;position: relative;margin-top: 0px;}
+.undergo{height: 673px;}
+.undergo-div {height: 673px;background: url(../img/timg.jpg);background-size:cover;background-repeat: no-repeat;background-attachment: fixed;}
+.experience {position: absolute;margin-left: 0;margin-top: 10px;width: 100%;}
+.experience1{height: 540px;background: rgba(255,255,255,0.5);border-radius:10px;border: 3px solid #fff;}
+.evaluate{font-size: 19px;color: black;text-indent: 2em;font-weight: 300;}
+.evaluate:first-letter {font-size: 2em;}
+.ourevaluate {background: url(../img/image14.jpg);background-size: cover;background-repeat: no-repeat;background-attachment: fixed;}
+.ourevaluatediv {position: absolute;margin-left: 18px;margin-top: 15px;}
+#h12 {color: black;font-size: 30px;}
+.ourevaluateImg {border-radius:10px;border: 3px solid #fff;background-color:rgba(255,255,255,0.5);}
+.evaluate3{font-size: 19px;color: black;text-indent: 2em;font-weight: 300;width: 40%;}
+.evaluate3:first-letter {font-size: 2em;}
+.performance{ background: url(../img/image41.jpg);background-size: cover;background-repeat: no-repeat;background-attachment: fixed; }
+.perf{ width:1100px;overflow:hidden; margin:0 auto; border:4px solid #fff; border-radius:10px; margin-top:0px; overflow: hidden;background-color:rgba(255,255,255,0.5);}
+.perf_head{ width:1020px;padding:20px; background:#FFFFFF; margin:20px auto 40px; border-radius:15px;border:4px solid wheat;}
+.perf_head h2{ font-family:Cambria; line-height:59px; background: #F90; color:#FFF; border-radius:10px; padding-left:20px;}
+.perf_head p{ padding:10px 40px;}
+.perf_head p span{ color:#000; line-height:40px; font-weight:800; font-family:Georgia, "Times New Roman", Times, serif;}
+#footer{ width:100%;border-top:4px solid #000; background:rgba(255,255,255,0.6); margin-top:50px; line-height:25px; text-align:center;font-size: 25px; color: #000; padding:10px 0 }
+.Pfooter{margin-top: 10px;}
+.Pfooter2{margin-top: 10px;font-size: 20px;}
+.MV-div2 {width: 1000px;height: 200px;}
+
+.shouye{
+	height: 100%;
+	    width: 100%;
+	    background: #f4f4f4;
+	    background-repeat: no-repeat;
+	    background-size: cover;
+	    background-attachment: fixed;
+}
+
+	
+.title2{
+	margin-left: 300px;
+	margin-top: 30px;
+	font-size: 25px;
+	color: #000000;
+}

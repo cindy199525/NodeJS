@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="bootstrap.bundle.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="bootstrap.css" />
+		<title>test</title>
+
+		<script src="vue.js"></script>
+		<script src="axios.js"></script>
+		
+
+	</head>
+	<body class="container">
+		<div id="table1">
+			<!-- <h1>ass</h1> -->
+			<!-- <input v-model="ass"></input> -->
+			<!-- <h1>{{ass}}</h1> -->
+
+			<h2 class="text-center">model增删改查</h2>
+			<!--数据添加-->
+			<div Class="add-module">
+				<button type="button" class="btn btn-primary" @click="setData('add',null)">新增</button>
+			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr style="text-align:center;">
+						<th>序号</th>
+						<th>model_id</th>
+						<th>model_name</th>
+						<th>type</th>
+						<th>model_address</th>
+						<th>time</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr style="text-align:center;" v-for="(v,i) in lists" :key="v.id">
+						<td>{{i+1}}</td>
+						<td>{{v.model_id}}</td>
+						<td>{{v.model_name}}</td>
+						<td>{{v.type}}</td>
+						<td>{{v.Model_address}}</td>
+						<td>{{v.time}}</td>
+						<td>
+							<button type="button" class="btn btn-danger" class="delete" @click="dell(v,i)">删除</button>
+							<button type="button" class="btn btn-success" class="edit" @click="setData('edit',v)">编辑</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div id="layer" v-show="flag">
+				<div class="mask">
+					<div class="title">
+						{{state=='add'?'添加':'编辑'}}
+						<!-- <span @click="flag = flase"> x </span> -->
+					</div>
+					<form class="form-inline">
+					<div class="content">
+						<input class="form-control"  type="text" placeholder="Model ID" v-model.lazy="model_id" />
+						<input class="form-control" type="text" placeholder="Model name" v-model="model_name" />
+						<input class="form-control" type="text" placeholder="type" v-model="type" />
+						<input class="form-control" type="text" placeholder="Model address" v-model="Model_address" />
+						<input class="form-control" type="text" placeholder="time" v-model="time" />
+
+						<button type="button" class="btn btn-info" @click="submit()" :disabled="!model_id||!model_name||!type||!Model_address||!start_time">{{state=='add'?'添加':'编辑'}}</button>
+						<button type="button" class="btn btn-warning" @click="flag = flase">取消</button><br>
+						<span>{{tip}}</span>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script>
+	new Vue({
+		el: "#table1",
+		
+		data: {
+			flag: false, //弹框的显示与隐藏
+			state: 'add',
+			id: '',
+			tip: '',
+			limit: '',
+			page: '',
+			model_id:'',
+			model_name: '',
+			type: '',
+			Model_address:'',
+			time: '',
+			
+			lists: [],
+		},
+
+		mounted() {
+			this.getList();
+
+		},
+		methods: {
+			getList() {
+				axios.get('http://localhost:5001/backend/model/select_all_model',
+					{
+					   params: {
+					      limit :5,
+					      page:5
+					   }
+					 }
+					)
+				
+					.then(res => {
+						//alert("成功连接接口");
+						console.log(res.data.data.list_pcb);
+						this.lists = res.data.data.list_pcb;
+					}).catch(err => {
+						alert("连接接口错误");
+						console.log(err);
+					});
+			},
+			setData(type, v) {
+				this.flag = true;
+				this.state = type;
+				if (this.state == 'edit') {
+					
+					this.pcb_id=v.pcb_id,
+					this.pcb_number=v.pcb_number,
+					this.status=v.status,
+					this.start_time=v.start_time
+					// this.obj = { ...v};
+					
+				} else {
+
+					this.pcb_id="";
+					this.pcb_number="";
+					this.status="";
+					this.start_time="";
+				}
+			},
+			submit() {
+				if (this.state == 'add') {
+					axios.post('http://localhost:5001/backend/pcb/insert_pcb', {
+						
+						pcb_id:this.pcb_id,
+						pcb_number:this.pcb_number,
+						status:this.status,
+						start_time:this.start_time,
+
+						}).then(res => {
+						console.log(res);
+						let {code} = res.data;
+						this.getList();
+					}).catch(err => {
+						console.log(err);
+					})
+
+				} else {
+					
+					axios.put('http://localhost:5001/backend/pcb/update_pcb',{
+						
+						pcb_id:this.pcb_id,
+						pcb_number:this.pcb_number,
+						status:this.status,
+						start_time:this.start_time,
+						
+						}).then(res => {
+						console.log(res);
+						let {code} = res.data;
+						this.getList();
+						
+					}).catch(err => {
+						console.log(err);
+					})
+
+					// this.lists.forEach((item, i) => {
+					// 	if (item.id == this.obj.id) {
+					// 		this.lists[i] = this.obj;
+					// 	}
+					// })
+
+				};
+				this.flag = false;
+				this.pcb_id="";
+				this.pcb_number="";
+				this.status="";
+				this.start_time="";
+			},
+			dell(v, i) {
+				// this.lists.splice(i,1);
+				// this.lists = this.lists.filter(item => v.id != item.id);
+				// this.getList();
+
+			},
+			checkName: function(pcb_id) {
+				var that = this;
+				var pcb_id = that.pcb_id
+				setTimeout(function() {
+					// 调用接口,请求后端，判断pcbid是狗存在，
+					axios.post('http://localhost:5001/backend/pcb/pcb_is_null',{
+					    pcb_id : pcb_id
+					 }).then(res => {
+						console.log(res.data.data)
+						if (res.data.data == '1') {
+							that.tip = '用户名已存在，请重新输入'
+						} else {
+							that.tip = '恭喜你输入用户名可以使用'
+						}
+						let {
+							code
+						} = res.data;
+						if (code == '200') {
+							this.getList();
+						}
+					}).catch(err => {
+						console.log(err);
+					})
+					
+
+				}, 500)
+			}
+		},
+		watch: {
+			pcb_id: function(val) {
+				//调用后台接口验证用户名的合法性
+				this.checkName(val);
+				//修改提示信息
+				this.tip = '正在验证用户名...'
+			}
+		}
+
+	})
+</script>
